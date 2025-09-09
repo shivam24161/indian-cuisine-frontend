@@ -1,7 +1,7 @@
 # 🍛 Indian Food Explorer - Frontend
 
 A modern React-based web application for exploring Indian cuisine with advanced search, filtering, and recommendation features.
-To run this app , click on this url - https://react-indian-cuisine.netlify.app/login
+To run this app , click on this url - https://react-indian-cuisine.netlify.app/
 FIrst register yourself and then signin .
 When you signin with the correct details then you will be redirected to main list page .
 Where ypu can do different - different actions .
