@@ -296,6 +296,20 @@ npm install
 
 # Clear Vite cache
 rm -rf node_modules/.vite
+
+🏃 Running Locally
+Development Mode
+npm run dev
+
+
+Local: http://localhost:5173
+
+Production Mode (local preview)
+npm run build
+npm run preview
+
+
+Local Preview: http://localhost:4173
 ```
 
 #### **API Connection Issues**

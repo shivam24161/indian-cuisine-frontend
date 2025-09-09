@@ -25,12 +25,6 @@ import { useEffect, useState } from 'react'
 import { getAllIngredients, suggestDishes } from '../services/api'
 import { Checkbox, Button, Input, Dropdown, Option } from '@fluentui/react-components'
 
-/**
- * DishSuggester Component
- * 
- * Widget that allows users to select ingredients and get dish recommendations.
- * Supports flexible ingredient matching and provides real-time suggestions.
- */
 export default function DishSuggester() {
   // Ingredient management state
   const [options, setOptions] = useState<string[]>([])  // All available ingredients
@@ -60,14 +54,6 @@ export default function DishSuggester() {
     load()
   }, [])
 
-  /**
-   * Toggle ingredient selection
-   * 
-   * Adds ingredient to selection if not present, removes if already selected.
-   * Maintains immutable state updates for React optimization.
-   * 
-   * @param ing - Ingredient name to toggle
-   */
   const toggle = (ing: string) => {
     setSelected(s => 
       s.includes(ing) 

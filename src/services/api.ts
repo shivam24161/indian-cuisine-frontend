@@ -1,24 +1,7 @@
-/**
- * API Service Module
- * 
- * Centralized API service for communicating with the Indian Food Explorer backend.
- * Provides abstraction layer over HTTP requests with consistent error handling.
- * 
- * Features:
- * - Axios-based HTTP client with base configuration
- * - Dish data fetching and filtering
- * - Search and autosuggest functionality
- * - Ingredient-based dish recommendations
- * - Type-safe API responses
- * 
- * Base URL: http://localhost:3000 (development)
- * All endpoints are prefixed with /api/dishes
- */
-
 import axios from 'axios'
 
 // API configuration
-const API_BASE = 'http://localhost:3000'
+const API_BASE = (import.meta as any).env?.VITE_API_URL || "http://localhost:3000";
 
 /**
  * Axios instance with base configuration
