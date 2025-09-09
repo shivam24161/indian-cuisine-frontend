@@ -1,0 +1,329 @@
+/* ========================================
+   GLOBAL STYLES
+   ======================================== */
+
+/* Base styles for the entire application */
+body {
+    font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+    margin: 0;
+    background: #f3f3f3;
+}
+
+/* Main container for all page content */
+.container {
+    padding: 20px;
+    margin: 0 auto;
+}
+
+/* Global link styling */
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* ========================================
+   HEADER COMPONENT STYLES
+   ======================================== */
+
+/* Main application header */
+header.app-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 20px;
+    background: white;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+    position: relative;
+}
+
+/* Header title styling */
+.header-title {
+    margin: 0;
+    color: #0f6cbd;
+}
+
+/* Search box container in header */
+.search-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    position: relative;
+}
+
+/* Dropdown menu for search suggestions */
+.suggestions-menu {
+    position: absolute;
+    top: 42px;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    z-index: 1000;
+    min-width: 240px;
+}
+
+/* ========================================
+   AUTH FORM COMPONENT STYLES
+   ======================================== */
+
+/* Container for authentication forms */
+.auth-form-container {
+    max-width: 420px;
+    margin: 40px auto;
+}
+
+/* Form input container */
+.auth-form-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Input field styling */
+.auth-input {
+    margin-bottom: 12px;
+}
+
+/* Error message styling */
+.auth-error {
+    color: red;
+    margin-bottom: 12px;
+}
+
+/* Auth form links styling */
+.auth-link-container {
+    text-align: center;
+}
+
+/* ========================================
+   LIST PAGE COMPONENT STYLES
+   ======================================== */
+
+/* Main layout grid for list page */
+.list-page-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 32px;
+    padding-top: 16px;
+}
+
+/* Responsive layout for mobile */
+@media (max-width: 900px) {
+    .list-page-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Card component styling */
+.page-card {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: white;
+    border-radius: 8px;
+}
+
+/* Back button and filter container */
+.back-btn-container {
+    display: flex;
+    gap: 20px;
+}
+
+/* Dish list filter container */
+.dish-list-filter {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    width: 100%;
+    align-items: start;
+}
+
+/* Table header cells that are clickable for sorting */
+.table-header-clickable {
+    cursor: pointer;
+    user-select: none;
+    font-weight: 600;
+}
+
+/* Table cell with link styling */
+.table-link-cell {
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+/* Pagination controls container */
+.pagination-container {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 12px;
+}
+
+/* Pagination input field */
+.pagination-input {
+    width: 80px;
+}
+
+/* ========================================
+   DETAIL PAGE COMPONENT STYLES
+   ======================================== */
+
+/* Main container for dish detail page */
+.detail-page-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Back button row */
+.detail-back-btn-row {
+    display: flex;
+    justify-content: flex-start;
+}
+
+/* Detail page card styling */
+.detail-page-card {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: white;
+    border-radius: 8px;
+}
+
+/* Card header with zero margin */
+.detail-card-header {
+    margin: 0;
+}
+
+/* Grid layout for dish details */
+.detail-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+/* Responsive grid for mobile */
+@media (max-width: 600px) {
+    .detail-info-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Tags container for ingredients */
+.ingredient-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* ========================================
+   DISH SUGGESTER WIDGET STYLES
+   ======================================== */
+
+/* Main container for dish suggester widget */
+.suggester-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Scrollable ingredients selection box */
+.ingredients-box {
+    max-height: 220px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+/* Grid layout for ingredient checkboxes */
+.ingredients-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 6px 12px;
+    align-items: center;
+}
+
+/* No ingredients found message */
+.no-ingredients-message {
+    padding: 4px;
+}
+
+/* Button container for suggester actions */
+.suggester-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+/* Individual result item styling */
+.result-item {
+    border-bottom: 1px solid #eee;
+    padding: 6px 0;
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+
+/* Generic card styling */
+.card {
+    background: white;
+    padding: 12px;
+    border-radius: 8px;
+}
+
+/* Layout grid for two-column layout */
+.layout {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 48px;
+}
+
+/* Responsive layout for mobile */
+@media (max-width: 768px) {
+    .layout {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+}
+
+/* Loading state styling */
+.loading-message {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+}
+
+/* Error state styling */
+.error-message {
+    color: #d13438;
+    background: #fdf2f2;
+    padding: 12px;
+    border-radius: 4px;
+    border-left: 4px solid #d13438;
+}
+
+/* Success state styling */
+.success-message {
+    color: #0f5132;
+    background: #d1e7dd;
+    padding: 12px;
+    border-radius: 4px;
+    border-left: 4px solid #0f5132;
+}
+
+/* Welcome message styling */
+.welcome-message {
+    font-weight: bold;
+    font-style: italic;
+}
