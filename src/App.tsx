@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import { FluentProvider, webLightTheme } from '@fluentui/react-components';
 import Header from './components/Header'
 import ListPage from './pages/ListPage'
@@ -16,12 +16,9 @@ export default function App() {
       
       {/* Main content container */}
       <div className="container">
-        <Routes>
-          {/* Root redirect to login */}
-          <Route path="/" element={<Navigate to="/login" />} />
-          
+        <Routes>          
           {/* Public authentication routes */}
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
           
           {/* Protected routes - require authentication */}

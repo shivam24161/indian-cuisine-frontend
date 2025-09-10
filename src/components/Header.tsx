@@ -37,11 +37,11 @@ export default function Header() {
   const [by, setBy] = useState<'name' | 'ingredient' | 'origin'>('name')  // Search type
   const [suggests, setSuggests] = useState<any[]>([])  // API suggestions
   const [menuOpen, setMenuOpen] = useState(false)  // Dropdown visibility control
-  
+
   // Navigation and refs
   const nav = useNavigate()
   const containerRef = useRef<HTMLDivElement>(null)  // For click-outside detection
-  
+
   // Authentication hook
   const { logout, checkLogin, checkLog } = useAuth();
 
@@ -53,7 +53,7 @@ export default function Header() {
    */
   useEffect(() => {
     let mounted = true
-    
+
     const doFetch = async () => {
       // Clear suggestions if no query
       if (!q) {
@@ -61,7 +61,7 @@ export default function Header() {
         setMenuOpen(false)
         return
       }
-      
+
       try {
         // Fetch suggestions from API
         const r = await autosuggest(q, by, 8)
@@ -69,16 +69,16 @@ export default function Header() {
           setSuggests(r.data || [])
           setMenuOpen((r.data || []).length > 0)
         }
-      } catch (e) { 
-        console.error('Error fetching suggestions:', e) 
+      } catch (e) {
+        console.error('Error fetching suggestions:', e)
       }
     }
-    
+
     // Debounce API calls by 250ms
     const t = setTimeout(doFetch, 250)
-    return () => { 
-      mounted = false; 
-      clearTimeout(t) 
+    return () => {
+      mounted = false;
+      clearTimeout(t)
     }
   }, [q, by])
 
@@ -90,13 +90,13 @@ export default function Header() {
    */
   useEffect(() => {
     checkLogin();
-    
+
     const handleClickOutside = (e: MouseEvent) => {
       if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
         setMenuOpen(false)
       }
     }
-    
+
     document.addEventListener('mousedown', handleClickOutside)
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
@@ -112,13 +112,13 @@ export default function Header() {
    */
   const handleSelect = (s: any) => {
     const params = new URLSearchParams();
-    
+
     // Handle name search with ID - go to detail page
     if (by === "name" && s.id) {
       nav(`/dishes/${encodeURIComponent(s.id)}`);
       return;
     }
-    
+
     // Handle other search types - go to filtered list
     if (by === "origin") {
       params.set("origin", String(s));
@@ -128,59 +128,65 @@ export default function Header() {
       params.set("q", String(s));
       params.set("by", "name");
     }
-    
+
     nav(`/?${params.toString()}`);
-    
+
     // Clean up search state
     setMenuOpen(false);
     setSuggests([]);
     setQ('');
   };
 
+  const renderComp = <Button className='logout-btn' title='Logout' appearance='outline' onClick={logout} icon={<svg viewBox="0 0 24 24" width="24" height="24" stroke="#ff0000" strokeWidth="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>}></Button>;
+
   return (
     <header className="app-header" role="banner">
       {/* Application title */}
-      <h2 className="header-title">Indian Food Explorer</h2>
-      
+      <div className='header-container'>
+        <h2 className="header-title">Indian Food Explorer</h2>
+        {renderComp}
+      </div>
+
       {/* Search functionality - only shown when logged in */}
       {checkLog() && (
-        <div className="search-box" ref={containerRef}>
-          {/* Search input */}
-          <Input 
-            placeholder={`Search by ${by}`} 
-            value={q} 
-            onChange={(e: any) => setQ(e.target.value)} 
-          />
-          
-          {/* Search type selector */}
-          <Dropdown
-            placeholder="Select search by"
-            selectedOptions={[by]}
-            onOptionSelect={(_, data) => setBy(data.optionValue as "name" | "ingredient" | "origin")}
-          >
-            <Option value="name">Name</Option>
-            <Option value="ingredient">Ingredient</Option>
-            <Option value="origin">Origin</Option>
-          </Dropdown>
-          
-          {/* Suggestions dropdown */}
-          {menuOpen && suggests.length > 0 && (
-            <div className="suggestions-menu">
-              <Menu open>
-                <MenuList>
-                  {suggests.map((s: any, i: number) => (
-                    <MenuItem key={i} onClick={() => handleSelect(s)}>
-                      {typeof s === "string" ? s : s.name || s}
-                    </MenuItem>
-                  ))}
-                </MenuList>
-              </Menu>
-            </div>
-          )}
-          
+        <>
+          <div className="search-box" ref={containerRef}>
+            {/* Search input */}
+            <Input
+              placeholder={`Search by ${by}`}
+              value={q}
+              onChange={(e: any) => setQ(e.target.value)}
+            />
+
+            {/* Search type selector */}
+            <Dropdown
+              placeholder="Select search by"
+              selectedOptions={[by]}
+              onOptionSelect={(_, data) => setBy(data.optionValue as "name" | "ingredient" | "origin")}
+            >
+              <Option value="name">Name</Option>
+              <Option value="ingredient">Ingredient</Option>
+              <Option value="origin">Origin</Option>
+            </Dropdown>
+
+            {/* Suggestions dropdown */}
+            {menuOpen && suggests.length > 0 && (
+              <div className="suggestions-menu">
+                <Menu open>
+                  <MenuList>
+                    {suggests.map((s: any, i: number) => (
+                      <MenuItem key={i} onClick={() => handleSelect(s)}>
+                        {typeof s === "string" ? s : s.name || s}
+                      </MenuItem>
+                    ))}
+                  </MenuList>
+                </Menu>
+              </div>
+            )}
+          </div>
           {/* Logout button */}
-          <Button appearance='outline' onClick={logout}>Logout</Button>
-        </div>
+          {renderComp}
+        </>
       )}
     </header>
   )

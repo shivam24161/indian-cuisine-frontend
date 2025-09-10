@@ -62,7 +62,7 @@ export default function ListPage() {
   // Sorting state
   const [sortBy, setSortBy] = useState<string>("name");  // Current sort column
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");  // Sort direction
-  
+
   // Authentication hook
   const { getName } = useAuth();
 
@@ -150,7 +150,7 @@ export default function ListPage() {
     <div>
       {/* Welcome message for authenticated user */}
       <div className="welcome-message">{getName()}</div>
-      
+
       {/* Main two-column layout */}
       <div className="list-page-layout">
         {/* Left column: Dish list */}
@@ -164,7 +164,7 @@ export default function ListPage() {
                 </Button>
               </div>
             )}
-            
+
             {/* Header and origin filter */}
             <div className="dish-list-filter">
               <CardHeader
@@ -178,49 +178,51 @@ export default function ListPage() {
               />
             </div>
           </div>
-          
+
           {/* Dishes table */}
-          <Table>
-            <TableHeader>
-              <TableRow>
-                {["name", "origin", "prep_time", "cook_time", "ingredients"].map(
-                  (col) => (
-                    <TableHeaderCell
-                      key={col}
-                      className="table-header-clickable"
-                      onClick={() => toggleSort(col)}
-                    >
-                      {col.replace("_", " ").toUpperCase()}{" "}
-                      {renderSortIndicator(col)}
-                    </TableHeaderCell>
-                  )
-                )}
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {loading ? (
+          <div className="table-container">
+            <Table>
+              <TableHeader>
                 <TableRow>
-                  <TableCell colSpan={5} className="loading-message">Loading...</TableCell>
+                  {["name", "origin", "prep_time", "cook_time", "ingredients"].map(
+                    (col) => (
+                      <TableHeaderCell
+                        key={col}
+                        className="table-header-clickable"
+                        onClick={() => toggleSort(col)}
+                      >
+                        {col.replace("_", " ").toUpperCase()}{" "}
+                        {renderSortIndicator(col)}
+                      </TableHeaderCell>
+                    )
+                  )}
                 </TableRow>
-              ) : (
-                dishes.map((d) => (
-                  <TableRow key={d.id}>
-                    <TableCell>
-                      <Link to={`/dishes/${encodeURIComponent(d.id)}`} className="table-link-cell">
-                        {d.name}
-                      </Link>
-                    </TableCell>
-                    <TableCell>{d.origin}</TableCell>
-                    <TableCell>{d.prep_time || "-"}</TableCell>
-                    <TableCell>{d.cook_time || "-"}</TableCell>
-                    <TableCell>
-                      {d.ingredients?.slice(0, 4).join(", ")}
-                    </TableCell>
+              </TableHeader>
+              <TableBody>
+                {loading ? (
+                  <TableRow>
+                    <TableCell colSpan={5} className="loading-message">Loading...</TableCell>
                   </TableRow>
-                ))
-              )}
-            </TableBody>
-          </Table>
+                ) : (
+                  dishes.map((d) => (
+                    <TableRow key={d.id}>
+                      <TableCell>
+                        <Link to={`/dishes/${encodeURIComponent(d.id)}`} className="table-link-cell">
+                          {d.name}
+                        </Link>
+                      </TableCell>
+                      <TableCell>{d.origin}</TableCell>
+                      <TableCell>{d.prep_time || "-"}</TableCell>
+                      <TableCell>{d.cook_time || "-"}</TableCell>
+                      <TableCell>
+                        {d.ingredients?.slice(0, 4).join(", ")}
+                      </TableCell>
+                    </TableRow>
+                  ))
+                )}
+              </TableBody>
+            </Table>
+          </div>
 
           {/* Pagination controls */}
           <div className="pagination-container">
