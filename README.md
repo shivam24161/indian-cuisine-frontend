@@ -64,24 +64,6 @@ And when you click on any dish name then details of that list will get opens.
 - **ESLint** - Code linting and quality assurance
 - **TypeScript Compiler** - Type checking and compilation
 
-## 📋 Prerequisites
-
-Before running this application, ensure you have the following installed:
-
-### **Required Software**
-- **Node.js** (v16.0.0 or higher)
-- **npm** (v7.0.0 or higher) or **yarn** (v1.22.0 or higher)
-- **Git** (for version control)
-
-### **Backend Dependency**
-- **Indian Food Explorer Backend** must be running on `http://localhost:3000`
-- Ensure the backend API is accessible and contains the dish data
-
-### **System Requirements**
-- **RAM**: Minimum 4GB (8GB recommended)
-- **Storage**: At least 500MB free space
-- **Browser**: Modern browser with ES6+ support (Chrome, Firefox, Safari, Edge)
-
 ## 🚀 Installation
 
 ### **1. Clone the Repository**
@@ -99,16 +81,6 @@ npm install
 yarn install
 ```
 
-### **3. Verify Installation**
-```bash
-# Check if all dependencies are installed
-npm list
-
-# Verify Node.js and npm versions
-node --version
-npm --version
-```
-
 ## ⚙️ Configuration
 
 ### **Environment Variables**
@@ -117,23 +89,7 @@ Create a `.env` file in the root directory (optional):
 ```env
 # API Configuration
 VITE_API_BASE_URL=http://localhost:3000
-
-# Development Settings
-VITE_DEBUG_MODE=true
-VITE_LOG_LEVEL=info
 ```
-
-### **Backend Configuration**
-Ensure your backend is configured with:
-- **CORS enabled** for `http://localhost:5173`
-- **CSV data loaded** from `indian_food.csv`
-- **All API endpoints** accessible
-
-### **Browser Configuration**
-For development, ensure your browser allows:
-- **Local storage** for authentication
-- **CORS requests** to localhost:3000
-- **JavaScript execution**
 
 ## 🏃‍♂️ Running the Application
 
@@ -155,8 +111,12 @@ The application will be available at:
 # Build the application
 npm run build
 
-# Preview the production build
+# If you want to start the production server with production backend URL
 npm run preview
+or
+npm start
+# This will start production environment on your local without running the backend app
+# When running app in production mode on local then first data loading will take time , as this is a feature of render , they stop the service of the app in their is no activity and for starting it require approx 50s time 
 ```
 
 ### **Available Scripts**
@@ -169,9 +129,6 @@ npm run build
 
 # Preview production build locally
 npm run preview
-
-# Type checking
-npx tsc --noEmit
 
 # Lint code
 npm run lint
@@ -239,7 +196,7 @@ The frontend communicates with these backend endpoints:
 - `/dishes/:id` - Individual dish details
 
 ### **Public Routes**
-- `/login` - User login page
+- `/` - User login page
 - `/register` - User registration page
 - `/` - Redirects to login
 
@@ -255,120 +212,23 @@ The frontend communicates with these backend endpoints:
 ### **Best Practices**
 - **Component Documentation**: JSDoc comments for all components
 - **Type Safety**: Strict TypeScript configuration
-- **Error Handling**: Comprehensive error boundaries
 - **Performance**: Optimized re-renders and API calls
 - **Accessibility**: ARIA labels and keyboard navigation
 
 ### **Development Workflow**
+1. **Feature Development**: Create feature branches### **Development Workflow**
 1. **Feature Development**: Create feature branches
 2. **Code Review**: Ensure code quality and documentation
 3. **Testing**: Manual testing of all features
 4. **Build Verification**: Ensure production build works
 5. **Deployment**: Deploy to production environment
+2. **Code Review**: Ensure code quality and documentation
+3. **Testing**: Manual testing of all features
+4. **Build Verification**: Ensure production build works
+5. **Deployment**: Deploy to production environment
 
-## 🏗️ Building for Production
-
-### **Build Process**
-```bash
-# Create production build
-npm run build
-
-# Build output will be in 'dist/' directory
-ls -la dist/
-```
-
-### **Build Output**
-- **index.html** - Main HTML file
-- **assets/** - Bundled CSS and JavaScript
-- **Source maps** - For debugging (development only)
-
-### **Deployment Checklist**
-- [ ] Backend API is running and accessible
-- [ ] CORS is configured for production domain
-- [ ] Environment variables are set
-- [ ] Build is successful without errors
-- [ ] All features work in production build
-- [ ] Performance is optimized
-
-## 🔧 Troubleshooting
-
-### **Common Issues**
-
-#### **Build Errors**
-```bash
-# Clear node_modules and reinstall
-rm -rf node_modules package-lock.json
-npm install
-
-# Clear Vite cache
-rm -rf node_modules/.vite
-
-🏃 Running Locally
-Development Mode
-npm run dev
-
-
-Local: http://localhost:5173
-
-Production Mode (local preview)
-npm run build
-npm run preview
-
-
-Local Preview: http://localhost:4173
-```
-
-#### **API Connection Issues**
-- Verify backend is running on `http://localhost:3000`
-- Check CORS configuration in backend
-- Ensure all API endpoints are accessible
-- Check browser console for network errors
-
-#### **Authentication Issues**
-- Clear browser localStorage
-- Check if user data is properly stored
-- Verify authentication state management
-
-#### **Styling Issues**
-- Ensure `styles.css` is imported in `App.tsx`
-- Check CSS class names match component usage
-- Verify responsive breakpoints
-
-### **Debug Mode**
-Enable debug logging by setting:
-```javascript
-// In browser console
-localStorage.setItem('debug', 'true')
-```
-
-### **Performance Issues**
-- Use React DevTools Profiler
-- Check for unnecessary re-renders
-- Optimize API calls with proper caching
-- Use production build for performance testing
-
-## 📞 Support
-
-### **Getting Help**
-- Check the troubleshooting section above
-- Review browser console for error messages
-- Ensure all prerequisites are met
-- Verify backend API is running correctly
-
-### **Development Resources**
-- [React Documentation](https://react.dev/)
-- [TypeScript Handbook](https://www.typescriptlang.org/docs/)
-- [Vite Guide](https://vitejs.dev/guide/)
-- [Fluent UI Components](https://react.fluentui.dev/)
-
----
-
-## �� License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## 🤝 Contributing
-
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
