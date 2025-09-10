@@ -34,7 +34,10 @@ import { useAuth } from '../pages/Auth/useAuth';
 export default function Header() {
   // Search state management
   const [q, setQ] = useState('')  // Search query
-  const [by, setBy] = useState<'name' | 'ingredient' | 'origin'>('name')  // Search type
+  const [by, setBy] = useState<"name" | "ingredient" | "origin" | "state">(() => {
+    return (sessionStorage.getItem("searchBy") as any) || "name";
+  });
+
   const [suggests, setSuggests] = useState<any[]>([])  // API suggestions
   const [menuOpen, setMenuOpen] = useState(false)  // Dropdown visibility control
 
@@ -64,7 +67,7 @@ export default function Header() {
 
       try {
         // Fetch suggestions from API
-        const r = await autosuggest(q, by, 8)
+        const r = await autosuggest(q, by, 20)
         if (mounted) {
           setSuggests(r.data || [])
           setMenuOpen((r.data || []).length > 0)
@@ -110,28 +113,15 @@ export default function Header() {
    * 
    * @param s - Selected suggestion (string or object with id/name)
    */
+
   const handleSelect = (s: any) => {
-    const params = new URLSearchParams();
-
-    // Handle name search with ID - go to detail page
-    if (by === "name" && s.id) {
+    if (s.id) {
       nav(`/dishes/${encodeURIComponent(s.id)}`);
-      return;
+    } else {
+      const params = new URLSearchParams();
+      params.set(by, String(s));
+      nav(`/?${params.toString()}`);
     }
-
-    // Handle other search types - go to filtered list
-    if (by === "origin") {
-      params.set("origin", String(s));
-    } else if (by === "ingredient") {
-      params.set("ingredient", String(s));
-    } else if (by === "name") {
-      params.set("q", String(s));
-      params.set("by", "name");
-    }
-
-    nav(`/?${params.toString()}`);
-
-    // Clean up search state
     setMenuOpen(false);
     setSuggests([]);
     setQ('');
@@ -162,12 +152,19 @@ export default function Header() {
             <Dropdown
               placeholder="Select search by"
               selectedOptions={[by]}
-              onOptionSelect={(_, data) => setBy(data.optionValue as "name" | "ingredient" | "origin")}
+              onOptionSelect={(_, data) => {
+                const value = data.optionValue as "name" | "ingredient" | "origin" | "state";
+                setBy(value);
+                sessionStorage.setItem("searchBy", value);
+              }}
+              value={by}
             >
               <Option value="name">Name</Option>
               <Option value="ingredient">Ingredient</Option>
               <Option value="origin">Origin</Option>
+              <Option value="state">State</Option>
             </Dropdown>
+
 
             {/* Suggestions dropdown */}
             {menuOpen && suggests.length > 0 && (

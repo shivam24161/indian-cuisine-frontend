@@ -201,7 +201,16 @@ export default function ListPage() {
               <TableBody>
                 {loading ? (
                   <TableRow>
-                    <TableCell colSpan={5} className="loading-message">Loading...</TableCell>
+                    <TableCell colSpan={5} className="loading-message">
+                      <div>
+                        <p>Loading...</p>
+                        <p>Please wait while we fetch the dishes...</p>
+                        <p>As the render server boots and loads the data for the first time, it may take approximately 1 minute. Subsequent loads will be much faster.</p>
+                        <p>This is because of the server getting a cold start.
+                          In general the servers on free tier plans go to sleep after 30 minutes or so. And to “wake” them up again it takes about 1 minutes.
+                        </p>
+                      </div>
+                    </TableCell>
                   </TableRow>
                 ) : (
                   dishes.map((d) => (
