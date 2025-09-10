@@ -81,6 +81,8 @@ header.app-header {
 /* Dropdown menu for search suggestions */
 .suggestions-menu {
     position: absolute;
+    max-height: 250px;
+    overflow-y: auto;
     top: 42px;
     background: white;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
