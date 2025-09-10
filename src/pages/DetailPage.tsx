@@ -29,6 +29,7 @@ import {
   CardHeader,
   Tag,
 } from "@fluentui/react-components";
+import { formatValue } from "./ListPage";
 
 /**
  * DetailPage Component
@@ -40,7 +41,7 @@ export default function DetailPage() {
   // URL parameters and navigation
   const { id } = useParams();  // Dish ID from URL
   const navigate = useNavigate();
-  
+
   // Component state
   const [dish, setDish] = useState<any>(null);  // Dish data from API
 
@@ -52,7 +53,7 @@ export default function DetailPage() {
    */
   useEffect(() => {
     if (!id) return;
-    
+
     fetchDishById(id)
       .then((r) => setDish(r.data))
       .catch((e) => {
@@ -104,25 +105,25 @@ export default function DetailPage() {
         {/* Dish details in responsive grid */}
         <div className="detail-info-grid">
           <div>
-            <strong>Diet:</strong> {dish.diet || "-"}
+            <strong>Diet:</strong> {formatValue(dish.diet)}
           </div>
           <div>
-            <strong>Prep Time:</strong> {dish.prep_time || "-"}
+            <strong>Prep Time:</strong> {formatValue(dish.prep_time)}
           </div>
           <div>
-            <strong>Cook Time:</strong> {dish.cook_time || "-"}
+            <strong>Cook Time:</strong> {formatValue(dish.cook_time)}
           </div>
           <div>
-            <strong>Flavor:</strong> {dish.flavor_profile || "-"}
+            <strong>Flavor:</strong> {formatValue(dish.flavor_profile)}
           </div>
           <div>
-            <strong>Course:</strong> {dish.course || "-"}
+            <strong>Course:</strong> {formatValue(dish.course)}
           </div>
           <div>
-            <strong>State:</strong> {dish.state || "-"}
+            <strong>State:</strong> {formatValue(dish.state)}
           </div>
           <div>
-            <strong>Region:</strong> {dish.region || "-"}
+            <strong>Region:</strong> {formatValue(dish.region)}
           </div>
         </div>
       </Card>

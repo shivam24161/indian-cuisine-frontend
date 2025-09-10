@@ -42,6 +42,15 @@ import { useAuth } from "./Auth/useAuth";
  * Displays a paginated, filterable, and sortable list of Indian dishes.
  * Provides navigation to individual dish details and ingredient-based suggestions.
  */
+
+export function formatValue(value: any, fallback: string = "-") {
+  if (value === null || value === undefined || value === "" || value === "-1") {
+    return fallback;
+  }
+  return value;
+}
+
+
 export default function ListPage() {
   // URL search parameters for state management
   const [qparams, setQparams] = useSearchParams();
@@ -220,9 +229,9 @@ export default function ListPage() {
                           {d.name}
                         </Link>
                       </TableCell>
-                      <TableCell>{d.origin}</TableCell>
-                      <TableCell>{d.prep_time || "-"}</TableCell>
-                      <TableCell>{d.cook_time || "-"}</TableCell>
+                      <TableCell>{formatValue(d.origin)}</TableCell>
+                      <TableCell>{formatValue(d.prep_time)}</TableCell>
+                      <TableCell>{formatValue(d.cook_time)}</TableCell>
                       <TableCell>
                         {d.ingredients?.slice(0, 4).join(", ")}
                       </TableCell>
